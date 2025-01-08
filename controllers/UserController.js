@@ -1,0 +1,57 @@
+const User = require('../models/User')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+//registar usuário
+
+exports.registerUser = async (req, res) => {
+    try {
+        const {name, email, password} = req.body
+        const existingUser = await User.findOne({email})
+        if (existingUser){
+            return res.json({
+                error: true,
+                message: 'Este e-mail já está em uso'
+            })        
+        }
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const newUser = new User ({ name, email, password: hashedPassword})
+    await newUser.save()
+
+    res.status(201).json({
+        message: 'Usuário registrado com sucesso',
+        error: false})
+
+    } catch (error) {
+        res.status(500).json({ error: error.message})
+    }
+}
+
+
+exports.loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) {
+          return res.json({ 
+            error: true,
+            message: 'Usuário não encontrado'
+  
+          });
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid){
+            return res.json({
+                error: true,
+                message: 'Senha invalida'
+            })
+        }
+        const token = jwt.sign({ id: user._id}, `${process.env.CHAVE_JWT}`, {expiresIn: '25s'})
+        const usuario = user._id
+        res.status(200).json({token, usuario})
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}
