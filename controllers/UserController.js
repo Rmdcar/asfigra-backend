@@ -48,7 +48,7 @@ exports.loginUser = async (req, res) => {
                 message: 'Senha invalida'
             })
         }
-        const token = jwt.sign({ id: user._id}, `${process.env.CHAVE_JWT}`, {expiresIn: '25s'})
+        const token = jwt.sign({ id: user._id}, `${process.env.CHAVE_JWT}`, {expiresIn: '600s'})
         const usuario = user._id
         res.status(200).json({token, usuario})
     } catch (error) {
