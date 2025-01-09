@@ -23,14 +23,19 @@ app.use(bodyParser.json())
 
 connectToDataBase()
 
-app.use((req, res, next) =>{
-    console.log(`Tipo de requisição: ${req.method}`)
-    console.log(`Tipo de requisição: ${req.headers["content-type"]}`)
-    console.log(`Tipo de requisição: ${new Date()}`)
-    console.log(req.body)
-    next()
-  })
+app.use((req, res, next) => {
+  console.log(`Tipo de requisição: ${req.method}`);
+  console.log(`Tipo de requisição: ${req.headers["content-type"]}`);
+  console.log(`Horário da requisição: ${new Date()}`);
   
+  // Filtrar informações sensíveis do req.body
+  const safeBody = { ...req.body };
+  if (safeBody.password) delete safeBody.password; // Remove o campo "password"
+
+  console.log(`Corpo da requisição:`, safeBody);
+  next();
+});
+
 
 
 const PORT = 3000
