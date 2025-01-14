@@ -1,31 +1,28 @@
-const Receita = require('../models/Receitas')
+const Receita = require('../models/Receitas');
 
-//registar receita
-
+// Registrar receita
 exports.registerContribution = async (req, res) => {
     try {
-        const {name, mes, ano, dataRecebimento} = req.body
-        
-    const newContribution = new Receita ({ name, mes, ano, dataRecebimento})
-    await newContribution.save()
+        const { name, mes, ano, dataRecebimento, valor } = req.body;
 
-    res.status(201).json({
-        message: 'Receita cadastrada com sucessos',
-        error: false})
+        const newContribution = new Receita({ name, mes, ano, dataRecebimento, valor });
+        await newContribution.save();
 
+        res.status(201).json({
+            message: 'Receita cadastrada com sucesso',
+            error: false,
+        });
     } catch (error) {
-        res.status(500).json({ error: error.message})
+        res.status(500).json({ error: error.message });
     }
-}
+};
 
+// Obter todas as contribuições
 exports.getContributions = async (req, res) => {
-       
     try {
-        const contributions = await Receita.find({}).select
-        res.status(200).json(contributions)
-        
+        const contributions = await Receita.find({});
+        res.status(200).json(contributions);
     } catch (error) {
-        res.status(500).json({error: error.message})
+        res.status(500).json({ error: error.message });
     }
-}
-
+};

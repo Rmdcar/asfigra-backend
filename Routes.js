@@ -1,21 +1,21 @@
-const express = require('express')
-const router = express.Router()
-const userController = require('./controllers/UserController')
-const contribution = require('./controllers/ContributionController')
-const expenses = require('./controllers/ExpensesControler')
+const express = require('express');
+const router = express.Router();
+const userController = require('./controllers/UserController');
+const contributionController = require('./controllers/ContributionController');
+const expensesController = require('./controllers/ExpensesController');
 
-//routes related to users
-router.post('/register', userController.registerUser)
-router.post('/login', userController.loginUser)
-router.get('/getAllUsers', userController.getUsers)
-router.delete('/deleteUser/:id', userController.deleteUser)
-router.patch('/update/:id', userController.editUser)
+// Rotas relacionadas aos usuários
+router.post('/register', userController.registerUser);
+router.post('/login', userController.loginUser);
+router.get('/getAllUsers', userController.getUsers);
+router.delete('/deleteUser/:id', userController.deleteUser);
+router.patch('/update/:id', userController.editUser);
 
-//routes related to contributions
-router.post('/newcontribution', contribution.registerContribution)
-router.get('/getallcontributions', contribution.getContributions)
+// Rotas relacionadas às contribuições
+router.post('/newcontribution', contributionController.registerContribution);
+router.get('/getallcontributions', contributionController.getContributions);
 
-//routes related to contributions
-router.post('/newexpense', expenses.registerExpense)
+// Rotas relacionadas às despesas
+router.post('/newexpense', expensesController.registerExpense);
 
-module.exports = router
+module.exports = router;

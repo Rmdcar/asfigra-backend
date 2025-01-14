@@ -16,7 +16,17 @@ const receitaSchema = new mongoose.Schema({
   dataRecebimento: {
     type: Date,
     required: true   
+  },
+  tipo: {
+    type: String,
+    default: "receita", 
+    required: true
+  },
+  valor: {
+    type: Number,
+    required: true
   }
+
 });
 
 const ReceitaModel = mongoose.model("Receitas", receitaSchema)
