@@ -84,3 +84,23 @@ exports.deleteUser = async (req, res) => {
           res.status(500).json({error: 'Erro ao deletar usuários'})
         }
       }
+
+
+      exports.editUser = async (req, res) => {
+        const { id } = req.params;
+        try {
+            const { name, email, password} = req.body
+            const hashedPassword = await bcrypt.hash(password,10)
+            const newUser = ({name, email, password, hashedPassword})
+            const user = await User.findByIdAndUpdate(id, newUser, { new: true})
+            
+            if(!user){
+              res.status(404).json({erro: 'usuário não encontrado'})
+            }
+            res.status(200).json({error: 'usuário atualizado com sucesso', user})
+          
+            } catch (error) {
+              res.status(500).json({error: 'Erro ao atualizar usuário:'})
+            }
+          }
+    
