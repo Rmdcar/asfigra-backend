@@ -75,7 +75,7 @@ exports.deleteUser = async (req, res) => {
         const user = await User.findByIdAndDelete(id)
         res.status(200)
         if(!user){
-            res.staus(404).json({erro: 'usuário não encontrado'})
+            res.status(404).json({erro: 'usuário não encontrado'})
         }
 
     } catch (error) {
