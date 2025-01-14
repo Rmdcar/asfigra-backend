@@ -5,7 +5,7 @@ const despesaSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  descrição: {
+  descricao: {
     type: String,
     required: true
   },

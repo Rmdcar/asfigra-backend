@@ -4,9 +4,9 @@ const Despesa = require('../models/Expenses')
 
 exports.registerExpense = async (req, res) => {
     try {
-        const {categoria, descrição, mes, ano, dataPagamento} = req.body
+        const {categoria, descricao, mes, ano, dataPagamento} = req.body
         
-    const newExpense = new Despesa ({ categoria, descrição, mes, ano, dataPagamento})
+    const newExpense = new Despesa ({ categoria, descricao, mes, ano, dataPagamento})
     await newExpense.save()
 
     res.status(201).json({
