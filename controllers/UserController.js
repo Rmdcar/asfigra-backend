@@ -58,8 +58,7 @@ exports.loginUser = async (req, res) => {
 
 
 exports.getUsers = async (req, res) => {
-    
-    
+       
     try {
         const users = await User.find({}).select('-password')
         res.status(200).json(users)
@@ -91,7 +90,7 @@ exports.deleteUser = async (req, res) => {
         try {
             const { name, email, password} = req.body
             const hashedPassword = await bcrypt.hash(password,10)
-            const newUser = ({name, email, password, hashedPassword})
+            const newUser = ({name, email, password: hashedPassword})
             const user = await User.findByIdAndUpdate(id, newUser, { new: true})
             
             if(!user){
