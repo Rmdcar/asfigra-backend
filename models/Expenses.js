@@ -20,6 +20,15 @@ const despesaSchema = new mongoose.Schema({
   dataPagamento: {
     type: Date,
     required: true   
+  },
+  tipo: {
+    type: String,
+    default: "despesas", 
+    required: true
+  },
+  valor: {
+    type: Number,
+    required: true
   }
 });
 

@@ -17,5 +17,6 @@ router.get('/getallcontributions', contributionController.getContributions);
 
 // Rotas relacionadas às despesas
 router.post('/newexpense', expensesController.registerExpense);
+router.get('/getallexpenses', expensesController.getExpenses)
 
 module.exports = router;
