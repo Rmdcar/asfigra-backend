@@ -13,6 +13,7 @@ router.patch('/update/:id', userController.editUser)
 
 //routes related to contributions
 router.post('/newcontribution', contribution.registerContribution)
+router.get('/getallcontributions', contribution.getContributions)
 
 //routes related to contributions
 router.post('/newexpense', expenses.registerExpense)

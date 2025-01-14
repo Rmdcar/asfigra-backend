@@ -18,3 +18,14 @@ exports.registerContribution = async (req, res) => {
     }
 }
 
+exports.getContributions = async (req, res) => {
+       
+    try {
+        const contributions = await Receita.find({}).select
+        res.status(200).json(contributions)
+        
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}
+
