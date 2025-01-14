@@ -8,6 +8,7 @@ const expenses = require('./controllers/ExpensesControler')
 router.post('/register', userController.registerUser)
 router.post('/login', userController.loginUser)
 router.get('/getAllUsers', userController.getUsers)
+router.delete('/deleteUser', userController.deleteUser)
 
 //routes related to contributions
 router.post('/newcontribution', contribution.registerContribution)
