@@ -13,6 +13,6 @@ router.get('/getAllUsers', userController.getUsers)
 router.post('/newcontribution', contribution.registerContribution)
 
 //routes related to contributions
-router.post('/newespense', expenses.registerExpense)
+router.post('/newexpense', expenses.registerExpense)
 
 module.exports = router
