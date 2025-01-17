@@ -89,7 +89,7 @@ exports.editUser = async (req, res) => {
     if (!user) {
       res.status(404).json({ erro: "usuário não encontrado" });
     }
-    res.status(200).json({ error: "usuário atualizado com sucesso", user });
+    res.status(200).json({ message: "usuário atualizado com sucesso", user });
   } catch (error) {
     res.status(500).json({ error: "Erro ao atualizar usuário:" });
   }

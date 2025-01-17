@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('./controllers/UserController');
 const contributionController = require('./controllers/ContributionController');
 const expensesController = require('./controllers/ExpensesController');
+const autentication = require('./middlewares/Auth')
 
 // Rotas relacionadas aos usuários
 router.post('/register', userController.registerUser);
@@ -13,10 +14,14 @@ router.patch('/update/:id', userController.editUser);
 
 // Rotas relacionadas às contribuições
 router.post('/newcontribution', contributionController.registerContribution);
-router.get('/getallcontributions', contributionController.getContributions);
+router.get('/getallcontributions', autentication.autenticacao, contributionController.getContributions);
+router.patch('/updatecontribution/:id', contributionController.editContributions)
+router.delete('/deletecontribution/:id', contributionController.deleteContribution)
 
 // Rotas relacionadas às despesas
 router.post('/newexpense', expensesController.registerExpense);
 router.get('/getallexpenses', expensesController.getExpenses)
+router.patch('/updateexpense/:id', expensesController.editExpenses)
+router.delete('/deleteexpense/:id', expensesController.deleteExpense)
 
 module.exports = router;
