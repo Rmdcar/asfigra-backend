@@ -1,11 +1,24 @@
 const Receita = require('../models/Receitas');
 
-// Registrar receita
+
+
 exports.registerContribution = async (req, res) => {
     try {
-        const { name, mes, ano, dataRecebimento, valor } = req.body;
+        const { name, mes, ano, dataRecebimento, valor, userId } = req.body;
 
-        const newContribution = new Receita({ name, mes, ano, dataRecebimento, valor });
+        // Verifica se o userId foi passado
+        if (!userId) {
+            return res.status(400).json({ error: 'userId is required' });
+        }
+
+        const newContribution = new Receita({ 
+            name, 
+            mes, 
+            ano, 
+            dataRecebimento, 
+            valor, 
+            user: userId 
+        });
         await newContribution.save();
 
         res.status(201).json({
@@ -16,6 +29,7 @@ exports.registerContribution = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 // Obter todas as contribuições
 exports.getContributions = async (req, res) => {

@@ -25,10 +25,14 @@ const receitaSchema = new mongoose.Schema({
   valor: {
     type: Number,
     required: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
   }
-
 });
 
-const ReceitaModel = mongoose.model("Receitas", receitaSchema)
+const ReceitaModel = mongoose.model("Receitas", receitaSchema);
 
-module.exports = ReceitaModel
+module.exports = ReceitaModel;
