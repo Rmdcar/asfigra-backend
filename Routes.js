@@ -14,7 +14,7 @@ router.patch('/update/:id', userController.editUser);
 
 // Rotas relacionadas às contribuições
 router.post('/newcontribution', contributionController.registerContribution);
-router.get('/getallcontributions', autentication.autenticacao, contributionController.getContributions);
+router.get('/getallcontributions',  contributionController.getContributions);
 router.patch('/updatecontribution/:id', contributionController.editContributions)
 router.delete('/deletecontribution/:id', contributionController.deleteContribution)
 
