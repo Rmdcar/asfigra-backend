@@ -47,7 +47,7 @@ exports.loginUser = async (req, res) => {
       });
     }
     const token = jwt.sign({ id: user._id }, `${process.env.CHAVE_JWT}`, {
-      expiresIn: "600s",
+      expiresIn: "6000s",
     });
     const usuario = user._id;
     res.status(200).json({ token, usuario });
@@ -64,6 +64,18 @@ exports.getUsers = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+exports.getUser = async (req, res) => {
+  const {id} = req.params
+  try {
+    const user = await User.findById(id).select("-password")
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;
